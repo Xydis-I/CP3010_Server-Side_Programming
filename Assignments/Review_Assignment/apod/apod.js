@@ -1,21 +1,11 @@
+import { getDateString, getPicture } from "./lib_apod.js";
+
 "use strict";
 
 function getElement(selector) {
     return document.querySelector(selector);
 }
 
-// returns date string in YYYY-MM-DD format - default param value is today's date
-function getDateString(dt = new Date()) {
-    return `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
-}
-
-async function getPicture(date) {
-    const dateString = getDateString(date);
-    const domain = `https://api.nasa.gov/planetary/apod`;
-    const request = `?api_key=DEMO_KEY&date=${dateString}`;
-    const response = await fetch(domain + request);
-    return await response.json();  
-}
 
 function clear() {
     getElement("#title").textContent = "";

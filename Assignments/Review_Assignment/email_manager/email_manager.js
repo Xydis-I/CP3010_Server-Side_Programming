@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async() => {
                 method: 'DELETE'
             });
         } catch (error) {
-            alert("Error: Delete email not working yet.");
+            alert("Error: Email not found.");
         }
 
         // make API GET request to display updated data

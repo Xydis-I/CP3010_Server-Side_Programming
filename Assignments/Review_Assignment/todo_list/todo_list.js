@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", async() => {
     const selectElement = getElement("#users");
     selectElement.textContent = "";  // clear previous <option> elements
 
+    let header = getElement("#list").firstElementChild;
+
     // create and add <option> element for each email 
     for (let user of users) {
         const option = document.createElement("option");
@@ -38,29 +40,12 @@ document.addEventListener("DOMContentLoaded", async() => {
 
         //Fix Header
         const selectList = getElement("#list");
-        selectList.appendChild(getTableHeader());
+        selectList.appendChild(header);
 
         // create and add <option> element for each email 
         displayToDoList(todoList);
     });
  });
-
-
- const getTableHeader = () => {
-    const todoHeader = document.createElement("thead");
-    const todoHeaderRow = document.createElement("tr");
-
-    const todoHeaderItem = document.createElement("th");
-    todoHeaderItem.textContent = "ToDo Item";
-    const todoHeaderComplete = document.createElement("th");
-    todoHeaderComplete.textContent = "Completed";
-
-    todoHeaderRow.appendChild(todoHeaderItem);
-    todoHeaderRow.appendChild(todoHeaderComplete);
-    todoHeader.appendChild(todoHeaderRow);
-
-    return todoHeader;
- }
 
 
  const displayToDoList = (todoList) => {
@@ -74,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async() => {
 
         todoRow.appendChild(todoItem);
         todoRow.appendChild(todoComplete);
-        
+
         getElement("#list").appendChild(todoRow);
     }
  }

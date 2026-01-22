@@ -41,15 +41,22 @@ function displayRovers(rovers) {
 }
 
 function displayRoverData(rover) {
-    getElement("#status").textContent = rover.status;
-    getElement("#photos").textContent = rover.total_photos;
-    getElement("#landing").textContent = rover.landing_date;
-    getElement("#max").textContent = rover.max_date;
+    getElement("#status").textContent = rover.status ?? "Unknown";
+    getElement("#photos").textContent = rover.total_photos ?? "Unknown";
+    getElement("#landing").textContent = rover.landing_date ?? "Unknown";
+    getElement("#max").textContent = rover.max_date ?? "Unknown";
     setDateSelects(rover.landing_date, rover.max_date);
     displayRoverCameras(rover.cameras);
 
     if (getElement("#options").classList.contains("hide")) {
         getElement("#options").classList.toggle("hide");
+    }
+
+    if (rover.total_photos == 0) {
+        console.log("true");
+        getElement("#view").disabled = true;
+    } else {
+        getElement("#view").disabled = false;
     }
 }
 
@@ -87,8 +94,16 @@ async function displayImages(rover, date, camera) {
 }
 
 function setDateSelects(landingDate, maxDate) {
-    let landing_date = new Date(landingDate.split('-'));
-    let max_date = new Date(maxDate.split('-'));
+    let landing_date = null;
+    let max_date = null;
+
+    try {
+        landing_date = new Date(landingDate.split('-'));
+        max_date = new Date(maxDate.split('-'));
+    } catch {
+        landing_date = new Date(landingDate.split('-'));
+        max_date = new Date();
+    }
 
     const yearSelectElement = getElement("#year");
     yearSelectElement.textContent = "";

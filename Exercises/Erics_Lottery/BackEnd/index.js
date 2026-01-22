@@ -30,6 +30,7 @@ app.get("/", (request, response) => {
     response.json({info: "An API that includes CORS headers."});
 });
 
+// Takes an array, "[4, 6, 13, 11, 3]", returns a string, "$15".
 app.post("/api/checkticket", (request, response) => {
     const ticket = request.body;
     let matches = 0;
@@ -47,4 +48,3 @@ app.post("/api/checkticket", (request, response) => {
 app.listen(3000, () => {
     console.log("API listening on port 3000.")
 });
-

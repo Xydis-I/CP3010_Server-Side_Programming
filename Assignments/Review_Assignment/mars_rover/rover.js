@@ -74,10 +74,15 @@ async function displayImages(rover, date, camera) {
     const selectElement = getElement("#display");
     selectElement.textContent = "";
 
-    for (const photo of json.photos) {
-        const img = document.createElement("img");
-        img.src = photo.img_src;
-        selectElement.appendChild(img); 
+    if (json.photos.length == 0) {
+        getElement("#view").nextElementSibling.textContent = "No Photos Found."
+    } else {
+        getElement("#view").nextElementSibling.textContent = ""
+        for (const photo of json.photos) {
+            const img = document.createElement("img");
+            img.src = photo.img_src;
+            selectElement.appendChild(img); 
+        }
     }
 }
 

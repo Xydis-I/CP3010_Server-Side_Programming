@@ -40,10 +40,6 @@ app.post("/api/checkticket", (request, response) => {
         }
     }
 
-    //console.log(ticket);
-    //console.log(winningNumbers);
-    //console.log(prices[matches]);
-    
     response.json(prices[matches]);
 });
 

@@ -53,7 +53,6 @@ function displayRoverData(rover) {
     }
 
     if (rover.total_photos == 0) {
-        console.log("true");
         getElement("#view").disabled = true;
     } else {
         getElement("#view").disabled = false;

@@ -6,7 +6,7 @@ import cors from "cors";
 // nodemon
 // npm run start
 
-const prices = {
+const prizes = {
     0: "You Lose",
     1: "$5",
     2: "$10",
@@ -40,7 +40,7 @@ app.post("/api/checkticket", (request, response) => {
         }
     }
 
-    response.json(prices[matches]);
+    response.json(prizes[matches]);
 });
 
 // listen for requests on port 3000

@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     getElement("#view").addEventListener("click", async () => {
         displayImages(json.rovers[getElement("#rover").value - 1].name, `${getElement("#year").value}-${getElement("#month").value}-${getElement("#date").value}`, getElement("#camera").value);
     });
+
+    getElement("#month").addEventListener("change", () => { setDays(getElement("#year").value, getElement("#month").value); });
 });
 
 function displayRovers(rovers) {
@@ -106,7 +108,14 @@ function setDateSelects(landingDate, maxDate) {
         monthSelectElement.appendChild(option);        
     }
 
-    for (let day = 1; day <= daysInMonth(yearSelectElement.value, monthSelectElement.value); day++) {
+    setDays(yearSelectElement.value, monthSelectElement.value);
+}
+
+function setDays(year, month) {
+    const dateSelectElement = getElement("#date");
+    dateSelectElement.textContent = "";
+
+    for (let day = 1; day <= daysInMonth(year, month); day++) {
         const option = document.createElement("option");
         option.value = day;
         const text = day;
@@ -115,6 +124,6 @@ function setDateSelects(landingDate, maxDate) {
     }
 }
 
-function daysInMonth (month, year) {
+function daysInMonth (year, month) {
     return new Date(year, month, 0).getDate();
 }

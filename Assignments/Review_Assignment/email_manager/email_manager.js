@@ -57,6 +57,16 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
 
         // make API GET request to display updated data
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            if (json.error)
+                alert("Server error - " + json.error.message);
+            else
+                displayEmails(json);        
+        } catch(e) {
+            alert(e.message);  
+        }   
     });
 
     getElement("#delete_email").addEventListener("click", async() => {
@@ -78,5 +88,15 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
 
         // make API GET request to display updated data
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            if (json.error)
+                alert("Server error - " + json.error.message);
+            else
+                displayEmails(json);        
+        } catch(e) {
+            alert(e.message);  
+        }   
     });
 });

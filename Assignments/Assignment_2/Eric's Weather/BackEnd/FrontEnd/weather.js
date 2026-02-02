@@ -23,6 +23,9 @@
 
             let response = await request.json();
 
+            let image = document.createElement('img');
+            image.src = `https://openweathermap.org/payload/api/media/file/${response.icon}.png`;
+
             let description = document.createElement('p');
             description.textContent = response.description;
             let temperature = document.createElement('p');
@@ -30,6 +33,7 @@
             let windspeed = document.createElement('p');
             windspeed.textContent = response.windspeed;
             
+            report.appendChild(image);
             report.appendChild(description);
             report.appendChild(temperature);
             report.appendChild(windspeed);

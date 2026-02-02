@@ -49,7 +49,8 @@ app.post("/api/weather", async(request, response) => {
     response.json({
         "description":weatherData.weather[0].main, 
         "temperature":`${(weatherData.main.temp - 273.15).toFixed(0)}°C`, 
-        "windspeed":`${weatherData.wind.speed}km/h`, 
+        "windspeed":`${weatherData.wind.speed}km/h`,
+        "icon":weatherData.weather[0].icon
     });
 });
 

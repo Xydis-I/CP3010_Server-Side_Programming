@@ -23,8 +23,30 @@
 
             let response = await request.json();
 
+            // OpenWeather offers Weather Condition Icons.
+            // Note: It seems they violated their own documentation at some point so most the .png names are not what they're supposed to be.
+            //       I've thrown together some lazy error handling below to take care of it.
+
+            const icons = "https://openweathermap.org/payload/api/media/file/";
+
             let image = document.createElement('img');
-            image.src = `https://openweathermap.org/payload/api/media/file/${response.icon}.png`;
+            image.src = primary(icons, response.icon);
+            image.dataset.code = response.icon;
+
+            image.addEventListener("error", (e) => {
+                const target = e.currentTarget;
+                const code = target.dataset.code;
+
+                const fb = fallback(icons, code);
+                
+                // Prevents infinite loop if fallback also fails, turns out the 'Broken Clouds' png is always 04d.png and is the only instance of this.
+                if (target.src === fb){
+                    target.src = icons + "04d.png";
+                    return;
+                }
+
+                target.src = fb;
+            });
 
             let description = document.createElement('p');
             description.textContent = response.description;
@@ -40,3 +62,12 @@
         }
     });
 });
+
+function primary(url, code) {
+    return `${url}${code}.png`;
+}
+
+// 13n -> 13d_n, 13d -> 13d_n
+function fallback(url, code) {
+    return `${url}${code.replace(/[dn]$/, "d_n")}.png`;
+}

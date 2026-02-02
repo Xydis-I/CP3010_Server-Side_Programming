@@ -1,5 +1,4 @@
 import express, { request, response } from "express";
-//import cors from "cors";
 import path from "path";
 import dotenv from 'dotenv';
 import { fileURLToPath } from "url";
@@ -11,18 +10,17 @@ dotenv.config();
 // npm run start
 
 const app = express();      // create Express app object
-//app.use(cors());            // add CORS middleware
 app.use(express.json());    // add JSON middleware
 
+// index.html available at http://localhost:3000/
 const file = fileURLToPath(import.meta.url);
 const dir = path.dirname(file);
-
-app.use(express.static(path.join(dir, "FrontEnd")));
-
+app.use(express.static(path.join(dir, "FrontEnd"))); // Required for weather.js
 app.get("/", (request, response) => {
     response.sendFile(path.join(dir, "FrontEnd", "index.html"));
 });
 
+// Two API calls, first a fetch to the Direct Geocoding API to convert city to coordinates, second to that Current Weather API.
 app.post("/api/weather", async(request, response) => {
     const location = request.body;
     const limit = 1;

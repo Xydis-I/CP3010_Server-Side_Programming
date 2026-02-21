@@ -1,11 +1,10 @@
-import Character from "./character";
+import Link from "next/link";
 
 export default async function(params) {
     
     let response = await fetch('https://rickandmortyapi.com/api/character');
     let data = await response.json();
     let characters = data.results;
-    // console.log(characters)
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -18,7 +17,7 @@ export default async function(params) {
                     <ul>
                         {characters.map(character => (
                             <li key={character.id}>
-                                <Character name={character.name} id={character.id}></Character>
+                                <Link href={"/characters/" + character.id}>{character.name}</Link>
                             </li>
                         ))}
                     </ul>

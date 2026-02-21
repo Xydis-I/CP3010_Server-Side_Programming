@@ -9,6 +9,12 @@ const nextConfig = {
         port: '',
         pathname: '/**', // Matches any image path
       },
+      {
+        protocol: 'https',
+        hostname: 'irs.www.warnerbros.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 

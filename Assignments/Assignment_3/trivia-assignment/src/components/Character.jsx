@@ -1,10 +1,9 @@
 import Image from "next/image";
 
-export default async function CharacterDetails(params) {
+export default async function Character(params) {
 
     let response = await fetch('https://rickandmortyapi.com/api/character/' + params.id);
     let data = await response.json();
-    console.log(data);
 
     return (
         <>
